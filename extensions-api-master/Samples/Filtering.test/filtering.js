@@ -12,10 +12,10 @@
       // Add button handlers for clearing filters.
       $('#clear').click(clearAllFilters);
 
-      $('#console').html("Hello World 1");
-      // __Filters.forEach(function (filter) {
+      $('#console').html("Hello World 2");
+      __Filters.forEach(function (filter) {
       //  $('#console').html(filter.fieldName);
-      // }
+      }
     }, function (err) {
       // Something went wrong in initialization.
       console.log('Error while Initializing: ' + err.toString());
