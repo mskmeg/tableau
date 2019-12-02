@@ -13,7 +13,8 @@
       $('#clear').click(clearAllFilters);
 
       $('#console').html("Hello World 3");
-      __Filters.forEach(function (filter) {
+      $('#console').html($('#console').html() + ' - ' + __filters.length);
+      __filters.forEach(function (filter) {
         $('#console').html(filter.fieldName);
       })
     }, function (err) {
