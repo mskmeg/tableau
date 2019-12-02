@@ -12,7 +12,7 @@
       // Add button handlers for clearing filters.
       $('#clear').click(clearAllFilters);
 
-      $('#console').html("Hello World");
+      $('#console').html("Hello World 1");
       __Filters.forEach(function (filter) {
         $('#console').html(filter.fieldName);
       }
