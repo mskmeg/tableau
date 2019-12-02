@@ -12,6 +12,7 @@
       $('#clear').click(clearAllFilters);
 
       dashboardfilters.filters.forEach(function (filter) {
+        $('#console').html("Hello world");
       }
     }, function (err) {
       // Something went wrong in initialization.
