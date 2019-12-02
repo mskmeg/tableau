@@ -97,7 +97,7 @@
       typeCell.innerHTML = filter.filterType;
       valuesCell.innerHTML = valueStr;
 
-      $('#console').html(filter.fieldName);
+      $('#console').html($('#console').html() + "<br>" + filter.fieldName);
     });
 
     updateUIState(Object.keys(filters).length > 0);
