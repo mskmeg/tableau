@@ -10,10 +10,6 @@
 
       // Add button handlers for clearing filters.
       $('#clear').click(clearAllFilters);
-
-      // dashboardfilters.filters.forEach(function (filter) {
-        $('#console').html("Hello world");
-      // }
     }, function (err) {
       // Something went wrong in initialization.
       console.log('Error while Initializing: ' + err.toString());
