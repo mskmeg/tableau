@@ -96,6 +96,8 @@
       worksheetCell.innerHTML = filter.worksheetName;
       typeCell.innerHTML = filter.filterType;
       valuesCell.innerHTML = valueStr;
+
+      $('#console').html(filter.fieldName);
     });
 
     updateUIState(Object.keys(filters).length > 0);
