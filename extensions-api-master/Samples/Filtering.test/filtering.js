@@ -17,6 +17,9 @@
       __filters.forEach(function (filter) {
         $('#console').html(filter.fieldName);
       })
+
+      InitFilters ();
+
     }, function (err) {
       // Something went wrong in initialization.
       console.log('Error while Initializing: ' + err.toString());
@@ -163,6 +166,35 @@
       });
     });
   }
+
+
+
+  // This function removes all filters from a dashboard.
+  function InitFilters () {
+    // While performing async task, show loading message to user.
+    $('#loading').removeClass('hidden').addClass('show');
+    $('#filtersTable').removeClass('show').addClass('hidden');
+
+    const dashboard = tableau.extensions.dashboardContent.dashboard;
+
+    dashboard.worksheets.forEach(function (worksheet) {
+      worksheet.getFiltersAsync().then(function (filtersForWorksheet) {
+        let filterClearPromises = [];
+
+        filtersForWorksheet.forEach(function (filter) {
+          filterClearPromises.push(worksheet.clearFilterAsync(filter.fieldName));
+        });
+
+        // Same pattern as in fetchFilters, wait until all promises have finished
+        // before updating the UI state.
+        Promise.all(filterClearPromises).then(function () {
+          updateUIState(false);
+        });
+      });
+    });
+  }
+
+
 
   // This helper updates the UI depending on whether or not there are filters
   // that exist in the dashboard.  Accepts a boolean.
