@@ -10,6 +10,12 @@
 
       // Add button handlers for clearing filters.
       $('#clear').click(clearAllFilters);
+
+      dashboardfilters.forEach(function (filter) {
+        if (filter.fieldName == "Invoice date") {
+          alert(filter.fieldName + " found.");
+        }
+      }
     }, function (err) {
       // Something went wrong in initialization.
       console.log('Error while Initializing: ' + err.toString());
