@@ -97,7 +97,10 @@
       typeCell.innerHTML = filter.filterType;
       valuesCell.innerHTML = valueStr;
 
-      $('#console').html($('#console').html() + "<br>" + filter.fieldName);
+
+      if (filter.fieldName == "Invoice date") {
+        $('#console').html($('#console').html() + "<br>" + filter.fieldName);
+      }
     });
 
     updateUIState(Object.keys(filters).length > 0);
