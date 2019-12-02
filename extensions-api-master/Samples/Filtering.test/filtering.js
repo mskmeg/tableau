@@ -12,7 +12,7 @@
       // Add button handlers for clearing filters.
       $('#clear').click(clearAllFilters);
 
-      $('#console').html("Hello World 5");
+      $('#console').html("Hello World 1");
       $('#console').html($('#console').html() + ' - ' + __filters.length);
       __filters.forEach(function (filter) {
         $('#console').html(filter.fieldName);
@@ -184,7 +184,7 @@
         filtersForWorksheet.forEach(function (filter) {
           if (filter.fieldName == "Invoice date") {
             let minDate = new Date("1/12/2019");
-            let maxDate = new Date("10/12/2019");
+            let maxDate = new Date();
             filterClearPromises.push(worksheet.applyRangeFilterAsync(filter.fieldName, { min: minDate, max: maxDate}));
 	  }
         });
