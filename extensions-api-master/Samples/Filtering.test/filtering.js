@@ -13,7 +13,7 @@
 
       dashboardfilters.forEach(function (filter) {
         if (filter.fieldName == "Invoice date") {
-          alert(filter.fieldName + " found.");
+          // alert(filter.fieldName + " found.");
         }
       }
     }, function (err) {
