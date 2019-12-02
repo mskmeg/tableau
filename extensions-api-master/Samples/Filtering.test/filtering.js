@@ -187,8 +187,8 @@
             let minDate = new Date();
             let maxDate = new Date();
 
-            minDate = minDate.setDate(today.getDate() - 1);
-            maxDate = maxDate.setDate(today.getDate() - 1);
+            minDate.setDate(today.getDate() - 1);
+            maxDate.setDate(today.getDate() - 1);
 
             filterClearPromises.push(worksheet.applyRangeFilterAsync(filter.fieldName, { min: minDate, max: maxDate}));
 	  }
