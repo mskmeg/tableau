@@ -183,8 +183,9 @@
 
         filtersForWorksheet.forEach(function (filter) {
           if (filter.fieldName == "Invoice date") {
-            let minDate = new Date("1/12/2019");
-            let maxDate = new Date();
+            let today = new Date();
+            let minDate = new Date(today.getDate() - 1);
+            let maxDate = new Date(today.getDate() - 1);
             filterClearPromises.push(worksheet.applyRangeFilterAsync(filter.fieldName, { min: minDate, max: maxDate}));
 	  }
         });
