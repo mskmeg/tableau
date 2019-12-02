@@ -7,16 +7,12 @@
 
   $(document).ready(function () {
     tableau.extensions.initializeAsync().then(function () {
-      fetchFilters();
+      // fetchFilters();
 
       // Add button handlers for clearing filters.
       $('#clear').click(clearAllFilters);
 
-      $('#console').html("Hello World 1");
-      $('#console').html($('#console').html() + ' - ' + __filters.length);
-      __filters.forEach(function (filter) {
-        $('#console').html(filter.fieldName);
-      })
+      $('#console').html("Hello World 2");
 
       InitFilters ();
 
