@@ -3,6 +3,7 @@
 // Wrap everything in an anonymous function to avoid polluting the global namespace
 (function () {
   let unregisterHandlerFunctions = [];
+  var __filters = [];
 
   $(document).ready(function () {
     tableau.extensions.initializeAsync().then(function () {
@@ -59,6 +60,7 @@
         });
       });
 
+      __filters = dashboardfilters;
       buildFiltersTable(dashboardfilters);
     });
   }
