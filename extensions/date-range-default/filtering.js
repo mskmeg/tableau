@@ -50,8 +50,11 @@
 
 
 
-  function configure() { 
-    const popupUrl = window.location.pathname + window.location.pathname;
+  function configure() {
+    let loc = window.location.pathname;
+    let dir = loc.substring(0, loc.lastIndexOf('/'));
+    let org = window.location.origin;
+    let popupUrl = org + '/' + dir + '/' + dialog.html;
     let defaultPayload = "";
 	  alert (popupUrl);
 
