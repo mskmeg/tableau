@@ -6,6 +6,8 @@
         tableau.extensions.initializeDialogAsync().then(function (openPayload) {
             buildSettingsTable(tableau.extensions.settings.getAll());
         });
+
+	$('#save').click(saveSetting);
     });
  
     function eraseSetting (key, row) {
