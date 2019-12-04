@@ -4,75 +4,69 @@
  
     $(document).ready(function () {
         tableau.extensions.initializeDialogAsync().then(function (openPayload) {
-            buildSettingsTable(tableau.extensions.settings.getAll());
+            buildDialog();
         });
-
-	$('#save').click(saveSetting);
     });
  
-    function eraseSetting (key, row) {
-    // This change won't be persisted until settings.saveAsync has been called.
-    tableau.extensions.settings.erase(key);
-
-    // Remove the setting from the UI immediately.
-    row.remove();
-
-    // Save in the background, saveAsync results don't need to be handled immediately.
-    tableau.extensions.settings.saveAsync();
-
-    updateUIState(Object.keys(tableau.extensions.settings.getAll()).length > 0);
-  }
-
-  function buildSettingsTable (settings) {
-    // Clear the table first.
-    $('#settingsTable > tbody tr').remove();
-    const settingsTable = $('#settingsTable > tbody')[0];
-alert(settings.length);
-    // Add an entry to the settings table for each setting.
-    for (const settingKey in settings) {
-      let newRow = settingsTable.insertRow(settingsTable.rows.length);
-      let keyCell = newRow.insertCell(0);
-      let valueCell = newRow.insertCell(1);
-      let eraseCell = newRow.insertCell(2);
-
-      let eraseSpan = document.createElement('span');
-      eraseSpan.className = 'glyphicon glyphicon-trash';
-      eraseSpan.addEventListener('click', function () { eraseSetting(settingKey, newRow); });
-
-      keyCell.innerHTML = settingKey;
-      valueCell.innerHTML = settings[settingKey];
-      eraseCell.appendChild(eraseSpan);
+    function buildDialog() {
+        let dashboard = tableau.extensions.dashboardContent.dashboard;
+        dashboard.worksheets.forEach(function (worksheet) {
+            $("#selectWorksheet").append("<option value='" + worksheet.name + "'>" + worksheet.name + "</option>");
+        });
+        var worksheetName = tableau.extensions.settings.get("worksheet");
+        if (worksheetName != undefined) {
+            $("#selectWorksheet").val(worksheetName);
+            columnsUpdate();
+        }
+ 
+        $('#selectWorksheet').on('change', '', function (e) {
+            columnsUpdate();
+        });
+        $('#cancel').click(closeDialog);
+        $('#save').click(saveButton);
+        $('.select').select2();
     }
-
-    updateUIState(Object.keys(settings).length > 0);
-  }
-
-  function saveSetting () {
-    let settingKey = $('#keyInput').val();
-    let settingValue = $('#valueInput').val();
-
-    tableau.extensions.settings.set(settingKey, settingValue);
-
-    // Save the newest settings via the settings API.
-    tableau.extensions.settings.saveAsync().then((currentSettings) => {
-      // This promise resolves to a list of the current settings.
-      // Rebuild the UI with that new list of settings.
-      buildSettingsTable(currentSettings);
-
-      // Clears the settings of content.
-      $('#settingForm').get(0).reset();
-    });
-  }
-
-  // This helper updates the UI depending on whether or not there are settings
-  // that exist in the dashboard.  Accepts a boolean.
-  function updateUIState (settingsExist) {
-    if (settingsExist) {
-      $('#settingsTable').removeClass('hidden').addClass('show');
-      $('#noSettingsWarning').removeClass('show').addClass('hidden');
-    } else {
-      $('#noSettingsWarning').removeClass('hidden').addClass('show');
-      $('#settingsTable').removeClass('show').addClass('hidden');
+ 
+    function columnsUpdate() {
+ 
+        var worksheets = tableau.extensions.dashboardContent.dashboard.worksheets;
+        var worksheetName = $("#selectWorksheet").val();
+ 
+        var worksheet = worksheets.find(function (sheet) {
+            return sheet.name === worksheetName;
+        });      
+ 
+        worksheet.getSummaryDataAsync({ maxRows: 1 }).then(function (sumdata) {
+            var worksheetColumns = sumdata.columns;
+            $("#selectCategory").text("");
+            $("#selectValue").text("");
+            var counter = 1;
+            worksheetColumns.forEach(function (current_value) {
+                $("#selectCategory").append("<option value='" + counter + "'>"+current_value.fieldName+"</option>");
+                $("#selectValue").append("<option value='" + counter + "'>"+current_value.fieldName+"</option>");
+                counter++;
+            });
+            $("#selectCategory").val(tableau.extensions.settings.get("categoryColumnNumber"));
+            $("#selectValue").val(tableau.extensions.settings.get("valueColumnNumber"));
+        });
     }
-  }
+ 
+    function reloadSettings() {
+         
+    }
+ 
+    function closeDialog() {
+        tableau.extensions.ui.closeDialog("10");
+    }
+ 
+    function saveButton() {
+ 
+        tableau.extensions.settings.set("worksheet", $("#selectWorksheet").val());
+        tableau.extensions.settings.set("categoryColumnNumber", $("#selectCategory").val());
+        tableau.extensions.settings.set("valueColumnNumber", $("#selectValue").val());
+ 
+        tableau.extensions.settings.saveAsync().then((currentSettings) => {
+            tableau.extensions.ui.closeDialog("10");
+        });
+    }
 })();
