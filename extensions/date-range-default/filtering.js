@@ -56,7 +56,6 @@
     let org = window.location.origin;
     let popupUrl = org + dir + '/dialog.html';
     let defaultPayload = "";
-	  alert (popupUrl);
 
     tableau.extensions.ui.displayDialogAsync(popupUrl, defaultPayload, { height: 500, width: 500 }).then((closePayload) => {
       // The promise is resolved when the dialog has been expectedly closed, meaning that
