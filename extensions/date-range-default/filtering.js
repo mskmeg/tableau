@@ -51,7 +51,7 @@
 
 
   function configure() { 
-    const popupUrl = `${window.location.origin}/dialog.html`;
+    const popupUrl = window.location.pathname;
     let defaultPayload = "";
 	  alert (popupUrl);
 
