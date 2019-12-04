@@ -27,7 +27,7 @@
     // Clear the table first.
     $('#settingsTable > tbody tr').remove();
     const settingsTable = $('#settingsTable > tbody')[0];
-
+alert(settings.length);
     // Add an entry to the settings table for each setting.
     for (const settingKey in settings) {
       let newRow = settingsTable.insertRow(settingsTable.rows.length);
