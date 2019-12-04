@@ -51,7 +51,7 @@
 
 
   function configure() { 
-    const popupUrl = window.location.pathname;
+    const popupUrl = window.location.pathname + window.location.pathname;
     let defaultPayload = "";
 	  alert (popupUrl);
 
