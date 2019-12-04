@@ -3,7 +3,6 @@
 // Wrap everything in an anonymous function to avoid polluting the global namespace
 (function () {
   $(document).ready(function () {
-	  alert ("HERE");
     tableau.extensions.initializeAsync({ 'configure':configure }).then(function () {
       $('#console').html("Hello World 3");
 
@@ -52,8 +51,9 @@
 
 
   function configure() { 
-    const popupUrl = `dialog.html`;
+    const popupUrl = `${window.location.origin}/dialog.html`;
     let defaultPayload = "";
+	  alert (popupUrl);
 
     tableau.extensions.ui.displayDialogAsync(popupUrl, defaultPayload, { height: 500, width: 500 }).then((closePayload) => {
       // The promise is resolved when the dialog has been expectedly closed, meaning that
