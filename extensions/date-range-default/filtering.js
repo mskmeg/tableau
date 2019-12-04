@@ -51,12 +51,10 @@
 
 
   function configure() { 
-    // ... code to configure the extension
-    // for example, set up and call displayDialogAsync() to create the configuration window 
-    // and set initial settings (defaultIntervalInMin)
-    // and handle the return payload 
-    // ...
-    tableau.extensions.ui.displayDialogAsync(popupUrl, defaultIntervalInMin, { height: 500, width: 500 }).then((closePayload) => {
+    const popupUrl = `${window.location.origin}/dialog.html`;
+    let defaultPayload = "";
+
+    tableau.extensions.ui.displayDialogAsync(popupUrl, defaultPayload, { height: 500, width: 500 }).then((closePayload) => {
       // The promise is resolved when the dialog has been expectedly closed, meaning that
       // the popup extension has called tableau.extensions.ui.closeDialog.
       // ...
@@ -65,8 +63,13 @@
      // ....
 
     }).catch((error) => {
-      //  ... 
-      // ... code for error handling
+      switch (error.errorCode) {
+        case tableau.ErrorCodes.DialogClosedByUser:
+          console.log("Dialog was closed by user");
+          break;
+        default:
+          console.error(error.message);
+      }
     });
   } 
 })();
