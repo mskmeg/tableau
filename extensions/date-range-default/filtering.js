@@ -3,6 +3,7 @@
 // Wrap everything in an anonymous function to avoid polluting the global namespace
 (function () {
   $(document).ready(function () {
+	  alert ("HERE");
     tableau.extensions.initializeAsync({ 'configure':configure }).then(function () {
       $('#console').html("Hello World 3");
 
