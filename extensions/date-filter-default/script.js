@@ -1,8 +1,8 @@
 tableau.extensions.initializeAsync().then(() => {
-  let dashboard = tableau.extensions.dashboardContent.dashboard;
-  let selectedWorksheet = dashboard.worksheets.find(w => w.name === 'Historical Trend');
-  let fieldName = 'Date';
-  updateFilterRange(selectedWorksheet, fieldName);
+//  let dashboard = tableau.extensions.dashboardContent.dashboard;
+//  let selectedWorksheet = dashboard.worksheets.find(w => w.name === 'Historical Trend');
+//  let fieldName = 'Date';
+//  updateFilterRange(selectedWorksheet, fieldName);
 
   $("body").html("Hello 2");
 });
