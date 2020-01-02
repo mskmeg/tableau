@@ -5,11 +5,15 @@
   $(document).ready(function () {
     tableau.extensions.initializeAsync().then(() => {
       let dashboard = tableau.extensions.dashboardContent.dashboard;
-      let selectedWorksheet = dashboard.worksheets.find(w => w.name === 'Historical Trend');
-      // let fieldName = 'Date';
-      // updateFilterRange(selectedWorksheet, fieldName);
+      let worksheets = dashboard.worksheets.find(w => w.name === 'Historical Trend');
 
-      $("body").html("Hello 3");
+      let sheets = "";
+
+      worksheets.forEach(funciton(worksheet) {
+        sheets = (sheets == "") ? worksheet.name : "<br>" + worksheet.name;
+      });
+ 
+      $("body").html(sheets);
     });
   });
 
