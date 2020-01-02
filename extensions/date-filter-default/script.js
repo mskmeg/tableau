@@ -84,8 +84,7 @@
 
       const valueStr = getFilterValues(filter);
 
-      // nameCell.innerHTML = filter.fieldName;
-      nameCell.innerHTML = filter.fieldId;
+      nameCell.innerHTML = filter.fieldName;
       worksheetCell.innerHTML = filter.worksheetName;
       typeCell.innerHTML = filter.filterType;
       valuesCell.innerHTML = valueStr;
