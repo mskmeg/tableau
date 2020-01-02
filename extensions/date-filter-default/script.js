@@ -13,6 +13,7 @@
         sheets = sheets + "<br>" + worksheet.name;
 
         worksheet.getFiltersAsync().then(function(filters) {
+		alert (filters.length);
           filters.forEach(function(filter) {
             sheets = sheets + "<br>=> " + filter.fieldName;
 	  });
