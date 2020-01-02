@@ -5,7 +5,7 @@
   let unregisterHandlerFunctions = [];
 
   $(document).ready(function () {
-    tableau.extensions.initializeAsync().then(function () {
+    tableau.extensions.initializeAsync({ 'configure':configure }).then(function () {
       fetchFilters();
 
       // Add button handlers for clearing filters.
@@ -162,5 +162,41 @@
       $('#noFiltersWarning').removeClass('hidden').addClass('show');
       $('#filtersTable').removeClass('show').addClass('hidden');
     }
+  }
+
+
+
+
+
+
+
+
+
+
+
+  function configure() {
+    let loc = window.location.pathname;
+    let dir = loc.substring(0, loc.lastIndexOf('/'));
+    let org = window.location.origin;
+    let popupUrl = org + dir + '/dialog.html';
+    let defaultPayload = "";
+
+    tableau.extensions.ui.displayDialogAsync(popupUrl, defaultPayload, { height: 500, width: 500 }).then((closePayload) => {
+      // The promise is resolved when the dialog has been expectedly closed, meaning that
+      // the popup extension has called tableau.extensions.ui.closeDialog.
+      // ...
+
+      // The close payload is returned from the popup extension via the closeDialog() method.
+     // ....
+
+    }).catch((error) => {
+      switch (error.errorCode) {
+        case tableau.ErrorCodes.DialogClosedByUser:
+          console.log("Dialog was closed by user");
+          break;
+        default:
+          console.error(error.message);
+      }
+    });
   }
 })();
