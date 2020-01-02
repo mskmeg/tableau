@@ -7,7 +7,7 @@
     <author name="Carlos Kim" email="kcarlos@bmp-group.com" organization="Bailey Metal Products" website="https://www.bmp-group.com/"/>
     <min-api-version>0.9</min-api-version>
     <source-location>
-      <url>YOUR URL HERE</url>
+      <url>https://mskmeg.github.io/tableau/extensions/date-filter-default/index.html</url>
     </source-location>
     <icon></icon>
   </dashboard-extension>

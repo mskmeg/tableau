@@ -3,6 +3,8 @@ tableau.extensions.initializeAsync().then(() => {
   let selectedWorksheet = dashboard.worksheets.find(w => w.name === 'Historical Trend');
   let fieldName = 'Date';
   updateFilterRange(selectedWorksheet, fieldName);
+
+  $("body").html("Hello 2");
 });
 
 function updateFilterRange(worksheet, fieldName) {
