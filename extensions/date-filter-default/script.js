@@ -13,8 +13,8 @@
         sheets = sheets + "<br>" + worksheet.name;
 
         worksheet.getFiltersAsync().then(function(filters) {
-		alert (filters.length);
           filters.forEach(function(filter) {
+		  alert(filter.fieldName);
             sheets = sheets + "<br>=> " + filter.fieldName;
 	  });
 	});
