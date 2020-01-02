@@ -10,6 +10,9 @@
       <url>https://mskmeg.github.io/tableau/extensions/date-filter-default/index.html</url>
     </source-location>
     <icon></icon>
+    <context-menu>
+      <configure-context-menu-item/>
+    </context-menu>
   </dashboard-extension>
   <resources>
     <resource id="name">
