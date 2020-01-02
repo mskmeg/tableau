@@ -7,10 +7,16 @@
       let dashboard = tableau.extensions.dashboardContent.dashboard;
       let worksheets = dashboard.worksheets;
 
-      let sheets = "Worksheet List";
+      let sheets = "Worksheet Filters";
 
       worksheets.forEach(function(worksheet) {
         sheets = sheets + "<br>" + worksheet.name;
+
+        worksheet.getFiltersAsync().then(function(filters) {
+          filters.forEach(function(filter) {
+            sheets = sheets + "<br>=> " + filter.fieldName;
+	  });
+	});
       });
  
       $("body").html(sheets);
