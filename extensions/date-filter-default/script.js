@@ -145,7 +145,7 @@
         // Same pattern as in fetchFilters, wait until all promises have finished
         // before updating the UI state.
         Promise.all(filterClearPromises).then(function () {
-          updateUIState(false);
+          updateUIState(true);
         });
       });
     });
