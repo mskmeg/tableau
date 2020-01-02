@@ -1,46 +1,55 @@
+<!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" type="text/css" href="libs/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/dialog.css">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Date Filter Default</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+    <!-- Extensions Library (this will be hosted on a CDN eventually) -->
+    <script src="../lib/tableau.extensions.1.latest.js"></script>
+
+    <!-- Our extension's code -->
+    <script src="./script.js"></script>
+  </head>
+  <body>
     <div class="container">
-        <div class="page-header">
-            <h1>Tableau Extension / <small> Settings</small></h1>
+      <!-- Filters Table -->
+      <div id="filters">
+        <h4>Current Filters</h4>
+        <div class="table-responsive">
+          <table id="loading" class="table">
+            <tbody><tr><td>Loading...</td></tr></tbody>
+          </table>     
+          <table id="filtersTable" class="table table-striped hidden">
+            <thead>
+              <tr>
+                <th>Filtered Field</th>
+                <th>Filtered Worksheet</th>
+                <th>Filter Type</th>
+                <th style="width: 100%">Current Values</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          <table id="noFiltersWarning" class="table bg-danger hidden">
+            <tbody><tr><td>There are no filters currently active in this dashboard.</td></tr></tbody>
+          </table>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-xs-6">
-                <span class="dropdown-label">Worksheet Data Source</span>
-                <select id="selectWorksheet" class="select">
-                    <option disabled selected="selected">-- None Selected --</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-xs-6">
-                <span class="dropdown-label">Select Category</span>
-                <select id="selectCategory" class="select">
-                    <option disabled selected="selected">-- None Selected --</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-xs-6">
-                <span class="dropdown-label">Select Value</span>
-                <select id="selectValue" class="select">
-                    <option disabled selected="selected">-- None Selected --</option>
-                </select>
-            </div>
-        </div>
-        <div class="row dialog-buttons">
-            <span id="error"></span>
-            <button id="save" class="btn btn-success">Save</button>
-            <button id="cancel" class="btn btn-danger">Cancel</button>
-        </div>
+      </div>
+
+      <!-- New Settings Submission Form -->
+      <div id="filterActions">
+        <button id="clear" type="button" class="btn btn-primary">Clear All</button>
+      </div>
     </div>
-</body>
-<script type="text/javascript" src="libs/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/tableau-extensions-1.0.0.min.js"></script>
-<script type="text/javascript" src="js/dialog.js"></script>
+  </body>
 </html>
