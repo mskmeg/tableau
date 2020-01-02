@@ -5,11 +5,11 @@
   $(document).ready(function () {
     tableau.extensions.initializeAsync().then(() => {
       let dashboard = tableau.extensions.dashboardContent.dashboard;
-      let worksheets = dashboard.worksheets.find(w => w.name === 'Historical Trend');
+      let worksheets = dashboard.worksheets;
 
       let sheets = "Worksheet List";
 
-      worksheets.forEach(funciton(worksheet) {
+      worksheets.forEach(function(worksheet) {
         sheets = sheets + "<br>" + worksheet.name;
       });
  
