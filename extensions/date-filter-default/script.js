@@ -4,7 +4,8 @@ tableau.extensions.initializeAsync().then(() => {
 //  let fieldName = 'Date';
 //  updateFilterRange(selectedWorksheet, fieldName);
 
-  $("body").html("Hello 2");
+  $("body").html("Hello 2<br>");
+  $("body").html($("body").html() + "Hello 3");
 });
 
 function updateFilterRange(worksheet, fieldName) {
