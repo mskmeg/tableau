@@ -84,7 +84,8 @@
 
       const valueStr = getFilterValues(filter);
 
-      nameCell.innerHTML = filter.fieldName;
+      // nameCell.innerHTML = filter.fieldName;
+      nameCell.innerHTML = filter.fieldId;
       worksheetCell.innerHTML = filter.worksheetName;
       typeCell.innerHTML = filter.filterType;
       valuesCell.innerHTML = valueStr;
@@ -145,7 +146,7 @@
         // Same pattern as in fetchFilters, wait until all promises have finished
         // before updating the UI state.
         Promise.all(filterClearPromises).then(function () {
-          updateUIState(true);
+          updateUIState(false);
         });
       });
     });
