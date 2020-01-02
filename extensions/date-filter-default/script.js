@@ -7,10 +7,10 @@
       let dashboard = tableau.extensions.dashboardContent.dashboard;
       let worksheets = dashboard.worksheets.find(w => w.name === 'Historical Trend');
 
-      let sheets = "";
+      let sheets = "Worksheet List";
 
       worksheets.forEach(funciton(worksheet) {
-        sheets = (sheets == "") ? worksheet.name : "<br>" + worksheet.name;
+        sheets = sheets + "<br>" + worksheet.name;
       });
  
       $("body").html(sheets);
