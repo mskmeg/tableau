@@ -10,8 +10,8 @@
   });
  
   function buildDialog() {
-    alert ("HERE1");
-    tableau.extensions.initializeAsync({ 'configure':configure }).then(function () {
+    alert ("HERE 3");
+    tableau.extensions.initializeAsync().then(function () {
       fetchFilters();
     }, function (err) {
       // Something went wrong in initialization.
