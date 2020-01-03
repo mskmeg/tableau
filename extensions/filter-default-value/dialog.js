@@ -10,6 +10,7 @@
   });
  
   function buildDialog() {
+	  alert("HERE1");
     fetchFilters();
   }
 
