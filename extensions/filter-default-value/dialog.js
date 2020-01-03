@@ -1,8 +1,6 @@
 'use strict';
  
 (function () {
-  let unregisterHandlerFunctions = [];
-
   $(document).ready(function () {
     tableau.extensions.initializeDialogAsync().then(function (openPayload) {
       buildDialog();
@@ -17,16 +15,6 @@
     // While performing async task, show loading message to user.
     $('#loading').addClass('show');
 
-    // Whenever we restore the filters table, remove all save handling functions,
-    // since we add them back later in this function.
-    unregisterHandlerFunctions.forEach(function (unregisterHandlerFunction) {
-      unregisterHandlerFunction();
-    });
-
-    // Since filter info is attached to the worksheet, we will perform
-    // one async call per worksheet to get every filter used in this
-    // dashboard.  This demonstrates the use of Promise.all to combine
-    // promises together and wait for each of them to resolve.
     let filterFetchPromises = [];
 
     // List of all filters in a dashboard.
@@ -38,11 +26,6 @@
     // Then loop through each worksheet and get its filters, save promise for later.
     dashboard.worksheets.forEach(function (worksheet) {
       filterFetchPromises.push(worksheet.getFiltersAsync());
-
-      // Add filter event to each worksheet.  AddEventListener returns a function that will
-      // remove the event listener when called.
-      let unregisterHandlerFunction = worksheet.addEventListener(tableau.TableauEventType.FilterChanged, filterChangedHandler);
-      unregisterHandlerFunctions.push(unregisterHandlerFunction);
     });
 alert ("HERE");
     // Now, we call every filter fetch promise, and wait for all the results
