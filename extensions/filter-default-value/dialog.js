@@ -27,7 +27,7 @@
     dashboard.worksheets.forEach(function (worksheet) {
       filterFetchPromises.push(worksheet.getFiltersAsync());
     });
-alert ("HERE");
+
     // Now, we call every filter fetch promise, and wait for all the results
     // to finish before displaying the results to the user.
     Promise.all(filterFetchPromises).then(function (fetchResults) {
@@ -55,11 +55,26 @@ alert ("HERE");
       let typeCell = newRow.insertCell(2);
       let valuesCell = newRow.insertCell(3);
 
-      const valueStr = getFilterValues(filter);
+      let valueArr = getFilterValues(filter);
+      let valueStr = '';
 
       nameCell.innerHTML = filter.fieldName;
       worksheetCell.innerHTML = filter.worksheetName;
       typeCell.innerHTML = filter.filterType;
+
+      if (valueArr.length == 1) {
+        valueStr = "Value: " + '<input id="value0" value="' + valueArr[0] + '">';
+      }
+      else if (valueArr.length == 2) {
+        valueStr = "Min: " + '<input id="value0" value="' + valueArr[0] + '"><br>'
+                 + "Max: " + '<input id="value1" value="' + valueArr[1] + '">';
+      }
+      else if (valueArr.length == 3) {
+        valueStr = "Period: " + '<input id="value0" value="' + valueArr[0] + '"><br>'
+                 + "RangeN: " + '<input id="value1" value="' + valueArr[1] + '"><br>'
+	         + "Range Type: " + '<input id="value1" value="' + valueArr[2] + '">'
+      }
+
       valuesCell.innerHTML = valueStr;
     });
 
@@ -69,34 +84,36 @@ alert ("HERE");
   // This returns a string representation of the values a filter is set to.
   // Depending on the type of filter, this string will take a different form.
   function getFilterValues (filter) {
-    let filterValues = '';
+    let filterValues = [];
 
     switch (filter.filterType) {
       case 'categorical':
         filter.appliedValues.forEach(function (value) {
-          filterValues += value.formattedValue + ', ';
+          filterValues.push(value.formattedValue);
         });
         break;
       case 'range':
         // A range filter can have a min and/or a max.
         if (filter.minValue) {
-          filterValues += 'min: ' + filter.minValue.formattedValue + ', ';
+          filterValues.push(filter.minValue.formattedValue);
         }
+        else {
+          filterValues.push(null);
+	}
 
         if (filter.maxValue) {
-          filterValues += 'min: ' + filter.maxValue.formattedValue + ', ';
+          filterValues.push(filter.maxValue.formattedValue);
         }
         break;
       case 'relative-date':
-        filterValues += 'Period: ' + filter.periodType + ', ';
-        filterValues += 'RangeN: ' + filter.rangeN + ', ';
-        filterValues += 'Range Type: ' + filter.rangeType + ', ';
+        filterValues.push(filter.periodType);
+        filterValues.push(filter.rangeN);
+        filterValues.push(filter.rangeType);
         break;
       default:
     }
 
-    // Cut off the trailing ", "
-    return filterValues.slice(0, -2);
+    return filterValues;
   }
 
   function updateUIState (filtersExist) {
