@@ -50,7 +50,7 @@
     $('#filtersTable > tbody tr').remove();
     const filtersTable = $('#filtersTable > tbody')[0];
 
-    filters.forEach(function (filter) {
+    filters.forEach(function (filter, i) {
       let newRow = filtersTable.insertRow(filtersTable.rows.length);
       let nameCell = newRow.insertCell(0);
       let worksheetCell = newRow.insertCell(1);
@@ -59,7 +59,7 @@
 
       let valueArr = getFilterValues(filter);
       let valueStr = '';
-
+alert(i);
       nameCell.innerHTML = filter.fieldId + "." + filter.fieldName;
       worksheetCell.innerHTML = filter.worksheetName;
       typeCell.innerHTML = filter.filterType;
