@@ -10,9 +10,9 @@
   });
  
   function buildDialog() {
+    alert ("HERE1");
     tableau.extensions.initializeAsync({ 'configure':configure }).then(function () {
       fetchFilters();
-	    alert("HERE2");
     }, function (err) {
       // Something went wrong in initialization.
       // console.log('Error while Initializing: ' + err.toString());
