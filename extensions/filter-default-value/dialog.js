@@ -59,11 +59,12 @@
 
       let valueArr = getFilterValues(filter);
       let valueStr = '';
-alert(i);
-      nameCell.innerHTML = filter.fieldId + "." + filter.fieldName;
+
+      nameCell.innerHTML = filter.fieldName;
       worksheetCell.innerHTML = filter.worksheetName;
       typeCell.innerHTML = filter.filterType;
 
+      valueStr = '<input type="hidden" id="filter"' + i + '" value="' + filter.fieldName + '">'
       switch (filter.filterType) {
         case 'categorical':
           valueStr = "Value: " + '<input id="value0" value="">';
