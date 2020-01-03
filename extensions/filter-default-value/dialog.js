@@ -4,6 +4,8 @@
   $(document).ready(function () {
     tableau.extensions.initializeDialogAsync().then(function (openPayload) {
       buildDialog();
+
+      $('#save').click(saveButton);
     });
   });
  
@@ -58,7 +60,7 @@
       let valueArr = getFilterValues(filter);
       let valueStr = '';
 
-      nameCell.innerHTML = filter.fieldName;
+      nameCell.innerHTML = filter.fieldName + "." + filter.fieldId;
       worksheetCell.innerHTML = filter.worksheetName;
       typeCell.innerHTML = filter.filterType;
 
@@ -134,46 +136,44 @@
 
 
  
-    function columnsUpdate() {
+  function columnsUpdate() {
+    var worksheets = tableau.extensions.dashboardContent.dashboard.worksheets;
+    var worksheetName = $("#selectWorksheet").val();
  
-        var worksheets = tableau.extensions.dashboardContent.dashboard.worksheets;
-        var worksheetName = $("#selectWorksheet").val();
+    var worksheet = worksheets.find(function (sheet) {
+      return sheet.name === worksheetName;
+    });      
  
-        var worksheet = worksheets.find(function (sheet) {
-            return sheet.name === worksheetName;
-        });      
+    worksheet.getSummaryDataAsync({ maxRows: 1 }).then(function (sumdata) {
+      var worksheetColumns = sumdata.columns;
+      $("#selectCategory").text("");
+      $("#selectValue").text("");
+      var counter = 1;
+      worksheetColumns.forEach(function (current_value) {
+        $("#selectCategory").append("<option value='" + counter + "'>"+current_value.fieldName+"</option>");
+        $("#selectValue").append("<option value='" + counter + "'>"+current_value.fieldName+"</option>");
+        counter++;
+      });
+      $("#selectCategory").val(tableau.extensions.settings.get("categoryColumnNumber"));
+      $("#selectValue").val(tableau.extensions.settings.get("valueColumnNumber"));
+    });
+  }
  
-        worksheet.getSummaryDataAsync({ maxRows: 1 }).then(function (sumdata) {
-            var worksheetColumns = sumdata.columns;
-            $("#selectCategory").text("");
-            $("#selectValue").text("");
-            var counter = 1;
-            worksheetColumns.forEach(function (current_value) {
-                $("#selectCategory").append("<option value='" + counter + "'>"+current_value.fieldName+"</option>");
-                $("#selectValue").append("<option value='" + counter + "'>"+current_value.fieldName+"</option>");
-                counter++;
-            });
-            $("#selectCategory").val(tableau.extensions.settings.get("categoryColumnNumber"));
-            $("#selectValue").val(tableau.extensions.settings.get("valueColumnNumber"));
-        });
-    }
+  function reloadSettings() {
+       
+  }
+
+  function closeDialog() {
+    tableau.extensions.ui.closeDialog("10");
+  }
  
-    function reloadSettings() {
-         
-    }
+  function saveButton() {
+    tableau.extensions.settings.set("worksheet", $("#selectWorksheet").val());
+    tableau.extensions.settings.set("categoryColumnNumber", $("#selectCategory").val());
+    tableau.extensions.settings.set("valueColumnNumber", $("#selectValue").val());
  
-    function closeDialog() {
-        tableau.extensions.ui.closeDialog("10");
-    }
- 
-    function saveButton() {
- 
-        tableau.extensions.settings.set("worksheet", $("#selectWorksheet").val());
-        tableau.extensions.settings.set("categoryColumnNumber", $("#selectCategory").val());
-        tableau.extensions.settings.set("valueColumnNumber", $("#selectValue").val());
- 
-        tableau.extensions.settings.saveAsync().then((currentSettings) => {
-            tableau.extensions.ui.closeDialog("10");
-        });
-    }
+    tableau.extensions.settings.saveAsync().then((currentSettings) => {
+      tableau.extensions.ui.closeDialog("10");
+    });
+  }
 })();
