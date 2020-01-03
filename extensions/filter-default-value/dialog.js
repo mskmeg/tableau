@@ -34,7 +34,7 @@
 
     // To get filter info, first get the dashboard.
     const dashboard = tableau.extensions.dashboardContent.dashboard;
-
+alert(dashboard.worksheets.length);
     // Then loop through each worksheet and get its filters, save promise for later.
     dashboard.worksheets.forEach(function (worksheet) {
       filterFetchPromises.push(worksheet.getFiltersAsync());
