@@ -10,6 +10,7 @@
   });
  
   function buildDialog() {
+    fetchFilters();
   }
 
   function fetchFilters () {
