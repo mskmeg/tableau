@@ -15,7 +15,8 @@
 	    alert("HERE2");
     }, function (err) {
       // Something went wrong in initialization.
-      console.log('Error while Initializing: ' + err.toString());
+      // console.log('Error while Initializing: ' + err.toString());
+      alert('Error while Initializing: ' + err.toString());
     });
   }
 
