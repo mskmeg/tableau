@@ -60,7 +60,7 @@
       let valueArr = getFilterValues(filter);
       let valueStr = '';
 
-      nameCell.innerHTML = filter.fieldName + "." + filter.fieldId;
+      nameCell.innerHTML = filter.fieldId + "." + filter.fieldName;
       worksheetCell.innerHTML = filter.worksheetName;
       typeCell.innerHTML = filter.filterType;
 
