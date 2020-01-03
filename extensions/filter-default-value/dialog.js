@@ -31,10 +31,10 @@
 
     // List of all filters in a dashboard.
     let dashboardfilters = [];
-alert ("HERE 1");
+
     // To get filter info, first get the dashboard.
     const dashboard = tableau.extensions.dashboardContent.dashboard;
-alert ("HERE 2");
+
     // Then loop through each worksheet and get its filters, save promise for later.
     dashboard.worksheets.forEach(function (worksheet) {
       filterFetchPromises.push(worksheet.getFiltersAsync());
@@ -79,6 +79,8 @@ alert ("HERE 2");
       typeCell.innerHTML = filter.filterType;
       valuesCell.innerHTML = valueStr;
     });
+
+    updateUIState(Object.keys(filters).length > 0);
   }
 
   // This returns a string representation of the values a filter is set to.
@@ -114,7 +116,16 @@ alert ("HERE 2");
     return filterValues.slice(0, -2);
   }
 
-
+  function updateUIState (filtersExist) {
+    $('#loading').addClass('hidden');
+    if (filtersExist) {
+      $('#filtersTable').removeClass('hidden').addClass('show');
+      $('#noFiltersWarning').removeClass('show').addClass('hidden');
+    } else {
+      $('#noFiltersWarning').removeClass('hidden').addClass('show');
+      $('#filtersTable').removeClass('show').addClass('hidden');
+    }
+  }
 
 
 
