@@ -10,14 +10,7 @@
   });
  
   function buildDialog() {
-    alert ("HERE 3");
-    tableau.extensions.initializeAsync().then(function () {
-      fetchFilters();
-    }, function (err) {
-      // Something went wrong in initialization.
-      // console.log('Error while Initializing: ' + err.toString());
-      alert('Error while Initializing: ' + err.toString());
-    });
+    fetchFilters();
   }
 
   function fetchFilters () {
@@ -38,7 +31,7 @@
 
     // List of all filters in a dashboard.
     let dashboardfilters = [];
-
+alert ("HERE 1");
     // To get filter info, first get the dashboard.
     const dashboard = tableau.extensions.dashboardContent.dashboard;
 
