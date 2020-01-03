@@ -62,17 +62,20 @@
       worksheetCell.innerHTML = filter.worksheetName;
       typeCell.innerHTML = filter.filterType;
 
-      if (valueArr.length == 1) {
-        valueStr = "Value: " + '<input id="value0" value="' + valueArr[0] + '">';
-      }
-      else if (valueArr.length == 2) {
-        valueStr = "Min: " + '<input id="value0" value="' + valueArr[0] + '"><br>'
-                 + "Max: " + '<input id="value1" value="' + valueArr[1] + '">';
-      }
-      else if (valueArr.length == 3) {
-        valueStr = "Period: " + '<input id="value0" value="' + valueArr[0] + '"><br>'
-                 + "RangeN: " + '<input id="value1" value="' + valueArr[1] + '"><br>'
-	         + "Range Type: " + '<input id="value1" value="' + valueArr[2] + '">'
+      switch (filter.filterType) {
+        case 'categorical':
+          valueStr = "Value: " + '<input id="value0" value="">';
+          break;
+        case 'range':
+          valueStr = "Min: " + '<input id="value0" value=""><br>'
+                   + "Max: " + '<input id="value1" value="">';
+          break;
+        case 'relative-date':
+          valueStr = "Period: " + '<input id="value0" value=""><br>'
+                   + "RangeN: " + '<input id="value1" value=""><br>'
+                   + "Range Type: " + '<input id="value1" value="">'
+          break;
+        default:
       }
 
       valuesCell.innerHTML = valueStr;
