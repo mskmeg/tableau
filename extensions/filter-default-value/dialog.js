@@ -34,7 +34,7 @@
 
     // To get filter info, first get the dashboard.
     const dashboard = tableau.extensions.dashboardContent.dashboard;
-alert(dashboard.worksheets.length);
+
     // Then loop through each worksheet and get its filters, save promise for later.
     dashboard.worksheets.forEach(function (worksheet) {
       filterFetchPromises.push(worksheet.getFiltersAsync());
@@ -44,7 +44,7 @@ alert(dashboard.worksheets.length);
       let unregisterHandlerFunction = worksheet.addEventListener(tableau.TableauEventType.FilterChanged, filterChangedHandler);
       unregisterHandlerFunctions.push(unregisterHandlerFunction);
     });
-
+alert ("HERE");
     // Now, we call every filter fetch promise, and wait for all the results
     // to finish before displaying the results to the user.
     Promise.all(filterFetchPromises).then(function (fetchResults) {
