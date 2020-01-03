@@ -67,14 +67,17 @@
       valueStr = '<input type="hidden" id="filter"' + i + '" value="' + filter.fieldName + '">'
       switch (filter.filterType) {
         case 'categorical':
-          valueStr = "Value: " + '<input id="value0" value="">';
+          valueStr = valueStr
+                   + "Value: " + '<input id="value0" value="">';
           break;
         case 'range':
-          valueStr = "Min: " + '<input id="value0" value=""><br>'
+          valueStr = valueStr
+                   + "Min: " + '<input id="value0" value=""><br>'
                    + "Max: " + '<input id="value1" value="">';
           break;
         case 'relative-date':
-          valueStr = "Period: " + '<input id="value0" value=""><br>'
+          valueStr = valueStr
+                   + "Period: " + '<input id="value0" value=""><br>'
                    + "RangeN: " + '<input id="value1" value=""><br>'
                    + "Range Type: " + '<input id="value1" value="">'
           break;
