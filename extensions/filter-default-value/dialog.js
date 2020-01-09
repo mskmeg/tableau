@@ -64,22 +64,29 @@
       worksheetCell.innerHTML = filter.worksheetName;
       typeCell.innerHTML = filter.filterType;
 
-      valueStr = '<input type="hidden" id="filter"' + i + '" value="' + filter.fieldName + '">'
+      let data = {
+             name : filter.fieldName,
+             worksheet : filter.worksheetName,
+             type : filter.filterType
+      };
+
+
+      valueStr = '<input type="hidden" id="filter' + i + '" value="' + encodeURIComponent(JSON.stringify(data)) + '">';
       switch (filter.filterType) {
         case 'categorical':
           valueStr = valueStr
-                   + "Value: " + '<input id="value0" value="">';
+                   + "Value: " + '<input id="filter' + i + '_value0" value="">';
           break;
         case 'range':
           valueStr = valueStr
-                   + "Min: " + '<input id="value0" value=""><br>'
-                   + "Max: " + '<input id="value1" value="">';
+                   + "Min: " + '<input id="filter' + i + '_value0" value=""><br>'
+                   + "Max: " + '<input id="filter' + i + '_value1" value="">';
           break;
         case 'relative-date':
           valueStr = valueStr
-                   + "Period: " + '<input id="value0" value=""><br>'
-                   + "RangeN: " + '<input id="value1" value=""><br>'
-                   + "Range Type: " + '<input id="value1" value="">'
+                   + "Period: " + '<input id="filter' + i + '_value0" value=""><br>'
+                   + "RangeN: " + '<input id="filter' + i + '_value1" value=""><br>'
+                   + "Range Type: " + '<input id="filter' + i + '_value2" value="">'
           break;
         default:
       }
