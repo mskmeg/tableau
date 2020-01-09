@@ -93,7 +93,7 @@
 
       valuesCell.innerHTML = valueStr;
     });
-
+alert ("v1");
     updateUIState(Object.keys(filters).length > 0);
   }
 
