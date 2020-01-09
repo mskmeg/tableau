@@ -72,7 +72,7 @@
 
 
       valueStr = '<input type="hidden" id="filter' + i + '" value="' + encodeURIComponent(JSON.stringify(data)) + '">';
-alert (encodeURIComponent(JSON.stringify(data)));
+alert (JSON.stringify(data));
       switch (filter.filterType) {
         case 'categorical':
           valueStr = valueStr
