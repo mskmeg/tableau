@@ -180,6 +180,10 @@
   }
  
   function saveButton() {
+    alert ($('#filter0_value0').val());
+
+    return;
+
     tableau.extensions.settings.set("worksheet", $("#selectWorksheet").val());
     tableau.extensions.settings.set("categoryColumnNumber", $("#selectCategory").val());
     tableau.extensions.settings.set("valueColumnNumber", $("#selectValue").val());
